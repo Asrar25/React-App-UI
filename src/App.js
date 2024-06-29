@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext, useState} from 'react';
 import './App.css';
 import GeneralInfo from './Components/GeneralInfo';
 import EducationInfo from './Components/EducationInfo';
@@ -8,56 +8,50 @@ import AdditionalQualification from './Components/AdditionalQualification';
 import References from './Components/References';
 import BackgroundData from './Components/BackgroundData';
 import ApplicantCertification from './Components/ApplicantCertification';
-import { Stepper,StepLabel,Step } from '@mui/material';
-import { multiStepContext } from './StepContext';
-
 
 function App() {
-  const{currentStep,finalData}=useContext(multiStepContext);
+  const formArray=[1,2,3,4,5,6,7,8];
+  const[formNo,setFormNo]=useState(formArray[0]);
+  function submitForm(){
+    document.body.innerHTML += '<h1>Submitted</h1>';
+  }
   function showStep(step){
     switch(step){
       case 1:
-        return <GeneralInfo/>
+        return <GeneralInfo nextStep={() => setFormNo(formNo + 1)} />
       case 2:
-        return <EducationInfo/>
+        return <EducationInfo nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 3:
-        return <PreviousExpInfo/>
+        return <PreviousExpInfo nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 4:
-        return <PreviousExpInfoConduct/>
+        return <PreviousExpInfoConduct nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 5:
-        return <AdditionalQualification/>
+        return <AdditionalQualification nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 6:
-        return <References/>
+        return <References nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 7:
-        return <BackgroundData/>
+        return <BackgroundData nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 8:
-        return <ApplicantCertification/>
+        return <ApplicantCertification nextStep={submitForm} preStep={() => setFormNo(formNo - 1)} />
       default:
         return <p>End</p>
     }
   }
   return (
-  //   <h1 className="text-3xl font-bold underline">
-  //   Hello world!
-  // </h1>
-    <div class="lg:container lg:mx-auto">
-  <div className="px-4">
-        <Stepper style={{width:"100%"}} activeStep={currentStep - 1} orientation="horizontal">
-          <Step>
-            <StepLabel></StepLabel>
-          </Step>
-          <Step><StepLabel></StepLabel></Step>
-          <Step><StepLabel></StepLabel></Step>
-          <Step><StepLabel></StepLabel></Step>
-          <Step><StepLabel></StepLabel></Step>
-          <Step><StepLabel></StepLabel></Step>
-          <Step><StepLabel></StepLabel></Step>
-          <Step><StepLabel></StepLabel></Step>
-        </Stepper>
+<div>
+        <div className=' px-6 flex justify-center items-center'> 
+            {
+              formArray.map((v,i)=><><div className={`w-[45px] my-3 text-white rounded-full ${formNo-1 === i || formNo-1===i+1 || formNo===formArray.length ?`bg-gray-700`:`bg-slate-400` } h-[35px] flex justify-center items-center`}>{v}
+                </div>
+                { i!== formArray.length-1 &&  <div className={`w-[100px]  h-[2px] ${formNo === i+2  || formNo==formArray.length?`bg-gray-700`:`bg-slate-400` }`}></div>}
+                </>)
+            }
         </div>
-       {showStep(currentStep)}
+       {showStep(formNo)}
       </div>
   );
 }
 
 export default App;
+
+
