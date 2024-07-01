@@ -39,12 +39,18 @@ function App() {
   }
   return (
 <div>
+
         <div className=' px-6 flex justify-center items-center'> 
             {
-              formArray.map((v,i)=><><div className={`w-[45px] my-3 text-white rounded-full ${formNo-1 === i || formNo-1===i+1 || formNo===formArray.length ?`bg-gray-700`:`bg-slate-400` } h-[35px] flex justify-center items-center`}>{v}
+             
+              formArray.map((v,i)=>
+              <>
+                <div className={`w-[45px] my-3 text-white rounded-full ${formNo-1 === i || formNo-1===i+1|| formNo-2===i+1|| formNo-3===i+1|| formNo-4===i+1|| formNo-5===i+1|| formNo-6===i+1|| formNo===formArray.length ?`bg-gray-700`:`bg-slate-400`} h-[35px] flex justify-center items-center`}>
+                  {v}
                 </div>
-                { i!== formArray.length-1 &&  <div className={`w-[100px]  h-[2px] ${formNo === i+2  || formNo==formArray.length?`bg-gray-700`:`bg-slate-400` }`}></div>}
-                </>)
+                    { i!== formArray.length-1 &&  <div className={`w-[100px]  h-[2px] ${formNo === i+2  || formNo==formArray.length?`bg-gray-700`:`bg-slate-400` }`}></div>}
+                </>
+                )
             }
         </div>
        {showStep(formNo)}
