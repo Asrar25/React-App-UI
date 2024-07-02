@@ -4,8 +4,8 @@ export default function ApplicantCertification({ preStep, nextStep }){
      
       
       <div class="px-20">
-  <form class="bg-white shadow-md rounded px-4 pt-6 pb-8 mb-4">
-      <div class="mb-4">
+          <form class="bg-white shadow-md rounded px-4 pt-6 pb-8 mb-4">
+                <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2">ApplicantCertification SiteVersion: 1.90.2Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 9728852Chromium: 122.0.6261.156Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2 Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 9728852Chromium: 122.0.6261.156Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 97288Chromium: 122.0.6261.15Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.1904 Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 9728852Chromium: 122.0.6261.156Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2 Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 9728852Chromium: 122.0.6261.156Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 97288Chromium: 122.0.6261.15Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045</label>
 <p>Acknowledged</p> <label htmlFor="signature" className="block text-gray-700 text-sm font-bold mb-2">
             Signature
