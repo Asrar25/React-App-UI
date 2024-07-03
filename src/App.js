@@ -1,4 +1,4 @@
-import React,{useContext, useState} from 'react';
+import React,{useState} from 'react';
 import './App.css';
 import GeneralInfo from './Components/GeneralInfo';
 import EducationInfo from './Components/EducationInfo';
@@ -9,7 +9,64 @@ import References from './Components/References';
 import BackgroundData from './Components/BackgroundData';
 import ApplicantCertification from './Components/ApplicantCertification';
 
+
 function App() {
+  const [formAllData, setFormAllData] = useState({
+    FullName: "",
+    PhoneNumber: "",
+    FaxNumber: "",
+    Email: "",
+    Address: "",
+    Position: "",
+    PresentSalary: "",
+    SalaryDesire: "",
+    Date: "",
+    Time: "",
+    AlreadySB: "",
+    Where: "",
+    Application: "",
+    LegallyWork: "",
+    SponsorshipEmployement: "",
+    ConvictedCrime: ""
+});
+const [educationData, setEducationData] = useState([
+  {Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: ""},
+  {Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: ""},
+  {Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: ""}
+]);
+const [courseData, setCourseData] = useState([
+  {Course: "", School: "", creditHour: "", Grade: ""},
+  {Course: "", School: "", creditHour: "", Grade: ""},
+  {Course: "", School: "", creditHour: "", Grade: ""},
+  {Course: "", School: "", creditHour: "", Grade: ""},
+  {Course: "", School: "", creditHour: "", Grade: ""}
+]);
+const [resultVerbalData, setResultVerbalData] = useState([
+  {SatVerbal: "", GreVerbal: "", Act: ""}
+]);
+const [resultMathData, setMathData] = useState([
+  {SatMath: "", GreMath: "", Lsat: ""}
+]);
+const [resultTotalData, setTotalData] = useState([
+  {SatTotal: "", GreTotal: "", Gmat: ""}
+]);
+const [scholarshipData, setScholarshipData] = useState([
+  {Scholarship: ""}
+]);
+const [cpaData, setCpaData] = useState([
+{partTaken: "", cpaState: "", licenseNumber: "",Active:""}
+]);
+const [previousexpData, setPreviousExpData] = useState([
+  {From: "", monthYear: "", phoneNumber: "", startSalary: "", lastSalary: "", To: "", Street: "", City: "", State: "", Zip: "",Resposibility:"",leaveReason:"",contactAboveEmp:"",Why:""}
+]);
+
+const handleChange = (e) => {
+  setFormAllData({
+      ...formAllData,
+      [e.target.name]: e.target.value
+  });
+};
+  
   const formArray=[1,2,3,4,5,6,7,8];
   const[formNo,setFormNo]=useState(formArray[0]);
   function submitForm(){
@@ -18,11 +75,12 @@ function App() {
   function showStep(step){
     switch(step){
       case 1:
-        return <GeneralInfo nextStep={() => setFormNo(formNo + 1)} />
+        return <GeneralInfo formAllData={formAllData}
+        setFormAllData={setFormAllData} handleChange={handleChange} nextStep={() => setFormNo(formNo + 1)} />
       case 2:
-        return <EducationInfo nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <EducationInfo setCpaData={setCpaData} cpaData={cpaData} setScholarshipData={setScholarshipData}educationData={educationData} scholarshipData={scholarshipData} setTotalData={setTotalData} setMathData={setMathData} resultTotalData={resultTotalData} resultMathData={resultMathData} resultVerbalData={resultVerbalData} setResultVerbalData={setResultVerbalData} courseData={courseData} setCourseData={setCourseData} setEducationData={setEducationData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 3:
-        return <PreviousExpInfo nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <PreviousExpInfo previousexpData={previousexpData} setPreviousExpData={setPreviousExpData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 4:
         return <PreviousExpInfoConduct nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 5:
