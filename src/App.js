@@ -59,7 +59,9 @@ const [cpaData, setCpaData] = useState([
 const [previousexpData, setPreviousExpData] = useState([
   {From: "", monthYear: "", phoneNumber: "", startSalary: "", lastSalary: "", To: "", Street: "", City: "", State: "", Zip: "",Resposibility:"",leaveReason:"",contactAboveEmp:"",Why:""}
 ]);
-
+const[additionalSkill,setAdditionalSkill]=useState({
+  Qualification:"",
+});
 const handleChange = (e) => {
   setFormAllData({
       ...formAllData,
@@ -84,7 +86,7 @@ const handleChange = (e) => {
       case 4:
         return <PreviousExpInfoConduct nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 5:
-        return <AdditionalQualification nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <AdditionalQualification additionalSkill={additionalSkill} setAdditionalSkill={setAdditionalSkill}nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 6:
         return <References nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 7:
