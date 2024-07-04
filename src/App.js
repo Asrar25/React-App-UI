@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import GeneralInfo from './Components/GeneralInfo';
 import EducationInfo from './Components/EducationInfo';
@@ -9,26 +9,112 @@ import References from './Components/References';
 import BackgroundData from './Components/BackgroundData';
 import ApplicantCertification from './Components/ApplicantCertification';
 
+
 function App() {
-  const formArray=[1,2,3,4,5,6,7,8];
-  const[formNo,setFormNo]=useState(formArray[0]);
-  function submitForm(){
+  const [formAllData, setFormAllData] = useState({
+    FullName: "",
+    PhoneNumber: "",
+    FaxNumber: "",
+    Email: "",
+    Address: "",
+    Position: "",
+    PresentSalary: "",
+    SalaryDesire: "",
+    Date: "",
+    Time: "",
+    AlreadySB: "",
+    Where: "",
+    Application: "",
+    LegallyWork: "",
+    SponsorshipEmployement: "",
+    ConvictedCrime: ""
+  });
+  const [educationData, setEducationData] = useState([
+    { Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: "" },
+    { Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: "" },
+    { Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: "" }
+  ]);
+  const [courseData, setCourseData] = useState([
+    { Course: "", School: "", creditHour: "", Grade: "" },
+    { Course: "", School: "", creditHour: "", Grade: "" },
+    { Course: "", School: "", creditHour: "", Grade: "" },
+    { Course: "", School: "", creditHour: "", Grade: "" },
+    { Course: "", School: "", creditHour: "", Grade: "" }
+  ]);
+  const [resultVerbalData, setResultVerbalData] = useState([
+    { SatVerbal: "", GreVerbal: "", Act: "" }
+  ]);
+  const [resultMathData, setMathData] = useState([
+    { SatMath: "", GreMath: "", Lsat: "" }
+  ]);
+  const [resultTotalData, setTotalData] = useState([
+    { SatTotal: "", GreTotal: "", Gmat: "" }
+  ]);
+  const [scholarshipData, setScholarshipData] = useState([
+    { Scholarship: "" }
+  ]);
+  const [cpaData, setCpaData] = useState([
+    { partTaken: "", cpaState: "", licenseNumber: "", Active: "" }
+  ]);
+  const [previousexpData, setPreviousExpData] = useState([
+    { From: "", monthYear: "", phoneNumber: "", startSalary: "", lastSalary: "", To: "", Street: "", City: "", State: "", Zip: "", Resposibility: "", leaveReason: "", contactAboveEmp: "", Why: "" }
+  ]);
+  const [previousexpInfoData, setPreviousExpInfoData] = useState([
+    {
+      From: "",
+      monthYear: "",
+      phoneNumber: "",
+      startSalary: "",
+      lastSalary: "",
+      To: "",
+      Street: "",
+      City: "",
+      State: "",
+      Zip: "",
+      Responsibility: "",
+      leaveReason: "",
+      contactAboveEmp: "",
+      Why: ""
+    }
+  ]);
+  const [additionalSkill, setAdditionalSkill] = useState({
+    Qualification: "",
+  });
+  const [referencedata, setReferencedata] = useState([
+    { Name: "", Organization: "", Relationship: "", Telephonic: "" },
+    { Name: "", Organization: "", Relationship: "", Telephonic: "" },
+    { Name: "", Organization: "", Relationship: "", Telephonic: "" },
+    { Name: "", Organization: "", Relationship: "", Telephonic: "" },
+
+  ])
+  const handleChange = (e) => {
+    setFormAllData({
+      ...formAllData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+
+  const formArray = [1, 2, 3, 4, 5, 6, 7, 8];
+  const [formNo, setFormNo] = useState(formArray[0]);
+  function submitForm() {
     document.body.innerHTML += '<h1>Submitted</h1>';
   }
-  function showStep(step){
-    switch(step){
+  function showStep(step) {
+    switch (step) {
       case 1:
-        return <GeneralInfo nextStep={() => setFormNo(formNo + 1)} />
+        return <GeneralInfo formAllData={formAllData}
+          setFormAllData={setFormAllData} handleChange={handleChange} nextStep={() => setFormNo(formNo + 1)} />
       case 2:
-        return <EducationInfo nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <EducationInfo setCpaData={setCpaData} cpaData={cpaData} setScholarshipData={setScholarshipData} educationData={educationData} scholarshipData={scholarshipData} setTotalData={setTotalData} setMathData={setMathData} resultTotalData={resultTotalData} resultMathData={resultMathData} resultVerbalData={resultVerbalData} setResultVerbalData={setResultVerbalData} courseData={courseData} setCourseData={setCourseData} setEducationData={setEducationData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 3:
-        return <PreviousExpInfo nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <PreviousExpInfo previousexpData={previousexpData} setPreviousExpData={setPreviousExpData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 4:
-        return <PreviousExpInfoConduct nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <PreviousExpInfoConduct previousexpInfoData={previousexpInfoData} setPreviousExpInfoData={setPreviousExpInfoData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 5:
-        return <AdditionalQualification nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <AdditionalQualification additionalSkill={additionalSkill} setAdditionalSkill={setAdditionalSkill} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 6:
-        return <References nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <References referencedata={referencedata} setReferencedata={setReferencedata} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 7:
         return <BackgroundData nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 8:
@@ -38,23 +124,23 @@ function App() {
     }
   }
   return (
-<div>
+    <div>
 
-        <div className=' px-6 flex justify-center items-center'> 
-            {
-             
-              formArray.map((v,i)=>
-              <>
-                <div className={`w-[45px] my-3 text-white rounded-full ${formNo-1 === i || formNo-1===i+1|| formNo-2===i+1|| formNo-3===i+1|| formNo-4===i+1|| formNo-5===i+1|| formNo-6===i+1|| formNo===formArray.length ?`bg-gray-700`:`bg-slate-400`} h-[35px] flex justify-center items-center`}>
-                  {v}
-                </div>
-                    { i!== formArray.length-1 &&  <div className={`w-[100px]  h-[2px] ${formNo === i+2  || formNo==formArray.length?`bg-gray-700`:`bg-slate-400` }`}></div>}
-                </>
-                )
-            }
-        </div>
-       {showStep(formNo)}
+      <div className=' px-6 flex justify-center items-center'>
+        {
+
+          formArray.map((v, i) =>
+            <>
+              <div className={`w-[45px] my-3 text-white rounded-full ${formNo - 1 === i || formNo - 1 === i + 1 || formNo - 2 === i + 1 || formNo - 3 === i + 1 || formNo - 4 === i + 1 || formNo - 5 === i + 1 || formNo - 6 === i + 1 || formNo === formArray.length ? `bg-gray-700` : `bg-slate-400`} h-[35px] flex justify-center items-center`}>
+                {v}
+              </div>
+              {i !== formArray.length - 1 && <div className={`w-[100px]  h-[2px] ${formNo === i + 2 || formNo == formArray.length ? `bg-gray-700` : `bg-slate-400`}`}></div>}
+            </>
+          )
+        }
       </div>
+      {showStep(formNo)}
+    </div>
   );
 }
 
