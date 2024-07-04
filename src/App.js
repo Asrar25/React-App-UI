@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
+=======
+import React,{useState} from 'react';
+>>>>>>> d9f5586dbdbc9a61d22fdc63eb906a628e72bc42
 import './App.css';
 import GeneralInfo from './Components/GeneralInfo';
 import EducationInfo from './Components/EducationInfo';
@@ -28,6 +32,7 @@ function App() {
     LegallyWork: "",
     SponsorshipEmployement: "",
     ConvictedCrime: ""
+<<<<<<< HEAD
   });
   const [educationData, setEducationData] = useState([
     { Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: "" },
@@ -98,21 +103,77 @@ function App() {
   const formArray = [1, 2, 3, 4, 5, 6, 7, 8];
   const [formNo, setFormNo] = useState(formArray[0]);
   function submitForm() {
+=======
+});
+const [educationData, setEducationData] = useState([
+  {Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: ""},
+  {Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: ""},
+  {Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: ""}
+]);
+const [courseData, setCourseData] = useState([
+  {Course: "", School: "", creditHour: "", Grade: ""},
+  {Course: "", School: "", creditHour: "", Grade: ""},
+  {Course: "", School: "", creditHour: "", Grade: ""},
+  {Course: "", School: "", creditHour: "", Grade: ""},
+  {Course: "", School: "", creditHour: "", Grade: ""}
+]);
+const [resultVerbalData, setResultVerbalData] = useState([
+  {SatVerbal: "", GreVerbal: "", Act: ""}
+]);
+const [resultMathData, setMathData] = useState([
+  {SatMath: "", GreMath: "", Lsat: ""}
+]);
+const [resultTotalData, setTotalData] = useState([
+  {SatTotal: "", GreTotal: "", Gmat: ""}
+]);
+const [scholarshipData, setScholarshipData] = useState([
+  {Scholarship: ""}
+]);
+const [cpaData, setCpaData] = useState([
+{partTaken: "", cpaState: "", licenseNumber: "",Active:""}
+]);
+const [previousexpData, setPreviousExpData] = useState([
+  {From: "", monthYear: "", phoneNumber: "", startSalary: "", lastSalary: "", To: "", Street: "", City: "", State: "", Zip: "",Resposibility:"",leaveReason:"",contactAboveEmp:"",Why:""}
+]);
+const[additionalSkill,setAdditionalSkill]=useState({
+  Qualification:"",
+});
+const handleChange = (e) => {
+  setFormAllData({
+      ...formAllData,
+      [e.target.name]: e.target.value
+  });
+};
+  
+  const formArray=[1,2,3,4,5,6,7,8];
+  const[formNo,setFormNo]=useState(formArray[0]);
+  function submitForm(){
+>>>>>>> d9f5586dbdbc9a61d22fdc63eb906a628e72bc42
     document.body.innerHTML += '<h1>Submitted</h1>';
   }
   function showStep(step) {
     switch (step) {
       case 1:
         return <GeneralInfo formAllData={formAllData}
+<<<<<<< HEAD
           setFormAllData={setFormAllData} handleChange={handleChange} nextStep={() => setFormNo(formNo + 1)} />
       case 2:
         return <EducationInfo setCpaData={setCpaData} cpaData={cpaData} setScholarshipData={setScholarshipData} educationData={educationData} scholarshipData={scholarshipData} setTotalData={setTotalData} setMathData={setMathData} resultTotalData={resultTotalData} resultMathData={resultMathData} resultVerbalData={resultVerbalData} setResultVerbalData={setResultVerbalData} courseData={courseData} setCourseData={setCourseData} setEducationData={setEducationData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+=======
+        setFormAllData={setFormAllData} handleChange={handleChange} nextStep={() => setFormNo(formNo + 1)} />
+      case 2:
+        return <EducationInfo setCpaData={setCpaData} cpaData={cpaData} setScholarshipData={setScholarshipData}educationData={educationData} scholarshipData={scholarshipData} setTotalData={setTotalData} setMathData={setMathData} resultTotalData={resultTotalData} resultMathData={resultMathData} resultVerbalData={resultVerbalData} setResultVerbalData={setResultVerbalData} courseData={courseData} setCourseData={setCourseData} setEducationData={setEducationData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+>>>>>>> d9f5586dbdbc9a61d22fdc63eb906a628e72bc42
       case 3:
         return <PreviousExpInfo previousexpData={previousexpData} setPreviousExpData={setPreviousExpData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 4:
         return <PreviousExpInfoConduct previousexpInfoData={previousexpInfoData} setPreviousExpInfoData={setPreviousExpInfoData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 5:
+<<<<<<< HEAD
         return <AdditionalQualification additionalSkill={additionalSkill} setAdditionalSkill={setAdditionalSkill} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+=======
+        return <AdditionalQualification additionalSkill={additionalSkill} setAdditionalSkill={setAdditionalSkill}nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+>>>>>>> d9f5586dbdbc9a61d22fdc63eb906a628e72bc42
       case 6:
         return <References referencedata={referencedata} setReferencedata={setReferencedata} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 7:
