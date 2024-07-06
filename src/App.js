@@ -34,6 +34,10 @@ function App() {
     { Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: "" },
     { Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: "" }
   ]);
+  const educationdata = educationData.filter(row => {
+    return Object.values(row).some(field => field !== "");
+  });
+  console.log(educationdata);
   const [courseData, setCourseData] = useState([
     { Course: "", School: "", creditHour: "", Grade: "" },
     { Course: "", School: "", creditHour: "", Grade: "" },
@@ -41,6 +45,11 @@ function App() {
     { Course: "", School: "", creditHour: "", Grade: "" },
     { Course: "", School: "", creditHour: "", Grade: "" }
   ]);
+  const coursedata = courseData.filter(row => {
+    return Object.values(row).some(field => field !== "");
+  });
+  console.log(coursedata);
+  
   const [resultVerbalData, setResultVerbalData] = useState([
     { SatVerbal: "", GreVerbal: "", Act: "" }
   ]);

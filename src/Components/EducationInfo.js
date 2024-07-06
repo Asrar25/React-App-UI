@@ -13,12 +13,10 @@ export default function EducationInfo({ setCourseData, setResultVerbalData, resu
     //-----Handle Function
 
 
-    const onChangeName = (index,field, value) => {
-        const updatedData = [...educationData];
-        // Update the specific field in the copied array
-        updatedData[index][field] = value;
-        // Update state with the modified array
-        setEducationData(updatedData);
+    const onChangeName = (index,e) => {
+        const newEducationData = [...educationData];
+        newEducationData[index] = { ...newEducationData[index], [e.target.name]: e.target.value };
+        setEducationData(newEducationData);
 
         const newEducationErrors = [...educationErrors];
         if (newEducationErrors[index]) { newEducationErrors[index] = { ...newEducationErrors[index], [e.target.name]: "" }; }
@@ -137,10 +135,6 @@ export default function EducationInfo({ setCourseData, setResultVerbalData, resu
             }
             return newcpaErrors;
         });
-
-
-
-
         if (newEducationErrors.every(row => Object.keys(row).length === 0)) {
             console.log(educationData);
             if (newCourseErrors.every(row => Object.keys(row).length === 0)) {
@@ -247,19 +241,21 @@ export default function EducationInfo({ setCourseData, setResultVerbalData, resu
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
-                            {educationData.map((row, index) => (
-                            <tr key={index}>
-                            <td><input type="text" value={row.Education} onChange={(e) => handleInputChange(index, "Education", e.target.value)} /></td>
-                            <td><input type="text" value={row.State} onChange={(e) => handleInputChange(index, "State", e.target.value)} /></td>
-                            <td><input type="text" value={row.DateAttend} onChange={(e) => handleInputChange(index, "DateAttend", e.target.value)} /></td>
-                            <td><input type="text" value={row.Degree} onChange={(e) => handleInputChange(index, "Degree", e.target.value)} /></td>
-                            <td><input type="text" value={row.GraduationDate} onChange={(e) => handleInputChange(index, "GraduationDate", e.target.value)} /></td>
-                            <td><input type="text" value={row.Major} onChange={(e) => handleInputChange(index, "Major", e.target.value)} /></td>
-                            <td><input type="text" value={row.Minor} onChange={(e) => handleInputChange(index, "Minor", e.target.value)} /></td>
-                            <td><input type="text" value={row.OverallGPA} onChange={(e) => handleInputChange(index, "OverallGPA", e.target.value)} /></td>
-                            <td><input type="text" value={row.GpaMajor} onChange={(e) => handleInputChange(index, "GpaMajor", e.target.value)} /></td>
-                            <td><input type="text" value={row.HrsWork} onChange={(e) => handleInputChange(index, "HrsWork", e.target.value)} /></td>
-                          </tr>
+                        {educationData.map((row, rowIndex) => (
+                            <tr key={rowIndex}>
+                                {Educationcolumns.map((Educationcolumn, colIndex) => (
+                                    <td key={colIndex} className="px-4 py-2">
+                                        <input
+                                            type="text"
+                                            className="w-full text-center text-sm text-gray-900"
+                                            name={Educationcolumn.name}
+                                            value={row[Educationcolumn.name]}
+                                            onChange={(e) => onChangeName(rowIndex, e)}
+                                        />
+                                        {educationErrors[rowIndex] && educationErrors[rowIndex][Educationcolumn.name] && (<p className="text-red-500 text-xs italic">{educationErrors[rowIndex][Educationcolumn.name]}</p>)}
+                                    </td>
+                                ))}
+                            </tr>
                         ))}
                     </tbody>
                 </table>
