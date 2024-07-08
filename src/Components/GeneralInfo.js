@@ -11,84 +11,84 @@ function GeneralInfo({formAllData, handleChange, nextStep}) {
 
 
         let errors = {};
-        // if (!formAllData.FullName) {
-        //     errors.FullName = "Full Name is required";
-        // }
-        // else if (formAllData.FullName.length < 3) {
-        //     errors.FullName = "Full Name must be at least 3 characters";
-        // }
-        // else if (!/^[a-zA-Z\s]+$/.test(formAllData.FullName)) {
-        //     errors.FullName = "Full Name can only contain letters and spaces";
-        // }
-        // // Add more validation rules as needed for other fields
-        // if (!formAllData.PhoneNumber.trim()) {
-        //     errors.PhoneNumber = "Phone Number is required";
-        // } else if (!/^\d{10}$/.test(formAllData.PhoneNumber.trim())) {
-        //     errors.PhoneNumber = "Phone Number must be exactly 10 digits";
-        // }
-        // if (!formAllData.FaxNumber.trim()) {
-        //     errors.FaxNumber = "Fax Number is required";
-        // } else if (!/^\+\d{2}\d{10}$/.test(formAllData.FaxNumber.trim())) {
-        //     errors.FaxNumber = "Fax Number must be in the format '+XX1234567890'";
-        // }
-        // if (!formAllData.Email.trim()) {
-        //     errors.Email = "Email is required";
-        // } else if (!/\S+@\S+\.\S+/.test(formAllData.Email.trim())) {
-        //     errors.Email = "Invalid email format";
-        // }
-        // if (!formAllData.Address.trim()) {
-        //     errors.Address = "Address is required";
-        // }
+        if (!formAllData.FullName) {
+            errors.FullName = "Full Name is required";
+        }
+        else if (formAllData.FullName.length < 3) {
+            errors.FullName = "Full Name must be at least 3 characters";
+        }
+        else if (!/^[a-zA-Z\s]+$/.test(formAllData.FullName)) {
+            errors.FullName = "Full Name can only contain letters and spaces";
+        }
+        // Add more validation rules as needed for other fields
+        if (!formAllData.PhoneNumber.trim()) {
+            errors.PhoneNumber = "Phone Number is required";
+        } else if (!/^\d{10}$/.test(formAllData.PhoneNumber.trim())) {
+            errors.PhoneNumber = "Phone Number must be exactly 10 digits";
+        }
+        if (!formAllData.FaxNumber.trim()) {
+            errors.FaxNumber = "Fax Number is required";
+        } else if (!/^\+\d{2}\d{10}$/.test(formAllData.FaxNumber.trim())) {
+            errors.FaxNumber = "Fax Number must be in the format '+XX1234567890'";
+        }
+        if (!formAllData.Email.trim()) {
+            errors.Email = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(formAllData.Email.trim())) {
+            errors.Email = "Invalid email format";
+        }
+        if (!formAllData.Address.trim()) {
+            errors.Address = "Address is required";
+        }
 
-        // // Position validation
-        // if (!formAllData.Position.trim()) {
-        //     errors.Position = "Position is required";
-        // }
+        // Position validation
+        if (!formAllData.Position.trim()) {
+            errors.Position = "Position is required";
+        }
 
-        // // Present Salary validation
-        // if (!formAllData.PresentSalary.trim()) {
-        //     errors.PresentSalary = "Present Salary is required";
-        // } else if (!/^\d+(\.\d{1,2})?$/.test(formAllData.PresentSalary.trim())) {
-        //     errors.PresentSalary = "Present Salary must be a valid number";
-        // }
+        // Present Salary validation
+        if (!formAllData.PresentSalary.trim()) {
+            errors.PresentSalary = "Present Salary is required";
+        } else if (!/^\d+(\.\d{1,2})?$/.test(formAllData.PresentSalary.trim())) {
+            errors.PresentSalary = "Present Salary must be a valid number";
+        }
 
-        // if (!formAllData.SalaryDesire.trim()) {
-        //     errors.SalaryDesire = "Salary Desire is required";
-        // } else if (!/^\d+(\.\d{1,2})?$/.test(formAllData.SalaryDesire.trim())) {
-        //     errors.SalaryDesire = "Salary Desire must be a valid number";
-        // }
+        if (!formAllData.SalaryDesire.trim()) {
+            errors.SalaryDesire = "Salary Desire is required";
+        } else if (!/^\d+(\.\d{1,2})?$/.test(formAllData.SalaryDesire.trim())) {
+            errors.SalaryDesire = "Salary Desire must be a valid number";
+        }
 
-        // if (!formAllData.Time.trim()) {
-        //     errors.Time = "Time is required";
-        // }
+        if (!formAllData.Time.trim()) {
+            errors.Time = "Time is required";
+        }
 
-        // AlreadySB validation
-        // if (!formAllData.AlreadySB.trim()) {
-        //     errors.AlreadySB = "This Fiel is required";
-        // }
-        // if (!formAllData.Application.trim()) {
-        //     errors.Application = "Application is required";
-        // }
-        // if (!formAllData.LegallyWork.trim()) {
-        //     errors.LegallyWork = "Legally Work is required";
-        // }
-        // if (!formAllData.SponsorshipEmployement.trim()) {
-        //     errors.SponsorshipEmployement = "Sponsorship Employement is required";
-        // }
-        // if (!formAllData.ConvictedCrime.trim()) {
-        //     errors.ConvictedCrime = "Convicted Crime is required";
-        // }
-        // if (!formAllData.Time.trim()) {
-        //     errors.Time = 'Time is required';
-        // }
-        // if (!formAllData.Date.trim()) {
-        //     errors.Date = "Date is required";
-        // } else {
-        //     const isValidDate = /^\d{4}-\d{2}-\d{2}$/.test(formAllData.Date.trim());
-        //     if (!isValidDate) {
-        //         errors.Date = "Date must be in the format YYYY-MM-DD";
-        //     }
-        // }
+       
+        if (!formAllData.AlreadySB.trim()) {
+            errors.AlreadySB = "This Fiel is required";
+        }
+        if (!formAllData.Application.trim()) {
+            errors.Application = "Application is required";
+        }
+        if (!formAllData.LegallyWork.trim()) {
+            errors.LegallyWork = "Legally Work is required";
+        }
+        if (!formAllData.SponsorshipEmployement.trim()) {
+            errors.SponsorshipEmployement = "Sponsorship Employement is required";
+        }
+        if (!formAllData.ConvictedCrime.trim()) {
+            errors.ConvictedCrime = "Convicted Crime is required";
+        }
+        if (!formAllData.Time.trim()) {
+            errors.Time = 'Time is required';
+        }
+        if (!formAllData.Date.trim()) {
+            errors.Date = "Date is required";
+        } else {
+            const isValidDate = /^\d{4}-\d{2}-\d{2}$/.test(formAllData.Date.trim());
+            if (!isValidDate) {
+                errors.Date = "Date must be in the format YYYY-MM-DD";
+            }
+        }
         if (Object.keys(errors).length == 0) {
             nextStep();
         } else {

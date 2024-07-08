@@ -1,45 +1,101 @@
+import { useState } from "react";
 
-export default function ApplicantCertification({ preStep, nextStep }) {
+import SubmitPop from "./SubmitPop";
+export default function ApplicantCertification({certifiedData,setCertifiedData,preStep, nextStep }) {
+  const [showPop,setShowPop]=useState(false);
+  const [errors, setErrors] = useState({});
+  const handleChange=(e)=>{
+    setCertifiedData({
+      ...certifiedData,
+      [e.target.name]: e.target.value
+    });
+  };
+  const handlesubmit=(e)=>{
+    e.preventDefault();
+    let errors={};
+    if (!certifiedData.signature) {
+          errors.signature = "Signature is must";
+      }
+   if (!certifiedData.date) {
+          errors.date = "Data From To is Required";
+      }
+    
+      if (Object.keys(errors).length === 0) {
+        console.log(certifiedData);
+        setShowPop(true);
+    }else {
+        console.log(errors);
+        setErrors(errors);
+    }
+  }
+
+  const handleOnClose=()=>setShowPop(false);
+
+  
+  
+  
   return (
 
 
     <div class="px-20">
 
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2">ApplicantCertification SiteVersion: 1.90.2Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 9728852Chromium: 122.0.6261.156Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2 Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 9728852Chromium: 122.0.6261.156Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 97288Chromium: 122.0.6261.15Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.1904 Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 9728852Chromium: 122.0.6261.156Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2 Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 9728852Chromium: 122.0.6261.156Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045Version: 1.90.2Commit: 5437499feb04f7a586f677b155b039bc2b3669ebDate: 2024-06-18T22:34:26.404Electron: 29.4.0ElectronBuildId: 97288Chromium: 122.0.6261.15Node.js: 20.9.0V8: 12.2.281.27-electron.0OS: Windows_NT x64 10.0.19045</label>
-        <p>Acknowledged</p> <label htmlFor="signature" className="block text-gray-700 text-sm font-bold mb-2">
-          Signature
+        <label class="block text-gray-700 text-sm font-bold mb-2">I hereby certify that all statements made in this application and in the pre-employment process are true and correct to the best of my knowledge and belief. I understand and agree that any
+        misrepresentation or omission of facts in my application or in the pre-employment process may result in rejection of my application, or termination of employment.</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2">  I understand an employee of SB & Company, LLC may make an investigation as to my character and general reputation. I authorize all current and past employers, schools, persons,and organizations having relevant information or 
+          knowledge to provide it to SB & Company, LLC or its designee, whether or not it is on their records. I hereby release SB & Company, LLC, its representatives and all such employers, schools, persons and organizations from all liability in making or responding to inquiries connected with my application.</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2">I understand that an employment relationship is established, my employment can be terminated at any time, with or without notice or cause, at the option of SB & Company, LLC or myself. I further understand that nothing contained in this
+        application or in the interview and communication process between me and SB & Company, LLC or any SB & Company, LLC representative stated or implied, is intended to create an employment contract or any other binding obligation on SB & Company, LLC.</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2">  Further, if granted a position with SB & Company, LLC, I will comply with all of SB & Company, LLC policies and procedures, a copy of which will be provided to me at the time of my first week of employment.</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2">  Under Maryland law, an employer may not require or demand, as a condition of employment, perspective employment, or continued employment, that an individual submit to or take a lie detector or similar test. An employer who violates this law is guilty of a
+        misdemeanor and subject to a fine not exceeding $100.</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2">
+        In signing this form, I certify that I understand all the questions and statements in this application.
         </label>
-        <input
+        </div>
+        <div className="flex gap-5">
+        <div className="font-bold h-6 mt-5 text-gray-500 text-xs leading-4 uppercase">Acknowledge:</div>
+        <div><input
           id="signature"
           name="signature"
           type="text"
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
-        />
+          value={certifiedData.signature}
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        /><label htmlFor="signature" className="block text-gray-700 text-sm font-bold">
+        Signature of Applicant
+      </label>
+      {errors.signature && <p className="text-red-500 text-xs italic">{errors.signature}</p>}
+      </div>
 
-        <label htmlFor="date" className="block text-gray-700 text-sm font-bold mb-2">
-          Date
-        </label>
+        <div>
         <input
           id="date"
           name="date"
           type="date"
+          value={certifiedData.date}
+          onChange={handleChange}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
+        /><label htmlFor="date" className="block text-gray-700 text-sm font-bold ">
+         {errors.date && <p className="text-red-500 text-xs italic">{errors.date}</p>}
+      </label>
       </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold">IF YES, GIVE DETAILS ON A SEPARATE PAGE AND ATTACH TO THE APPLICATION</label>
       </div>
+      <div className="font-bold h-6 mt-3 text-gray-500 text-xs leading-4 uppercase">
+        EEO Statement: SB & Company, LLC is an equal opportunity employer and will not discriminate against any application for employment on the basis of race, color, religion, sex, age, national origin, veteran status,
+        disability, or any other basis prohibited by law.
+      </div>
+
       <div class="flex items-center justify-between mt-4">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={preStep}>
           Back
         </button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={nextStep}>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={handlesubmit}>
           Next
         </button>
       </div>
 
-
+      <SubmitPop onClose={handleOnClose} visible={showPop}/>
 
     </div>
 

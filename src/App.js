@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import SubmitPop from './Components/SubmitPop';
 import GeneralInfo from './Components/GeneralInfo';
 import EducationInfo from './Components/EducationInfo';
 import PreviousExpInfo from './Components/PreviousExpInfo';
@@ -8,9 +9,11 @@ import AdditionalQualification from './Components/AdditionalQualification';
 import References from './Components/References';
 import BackgroundData from './Components/BackgroundData';
 import ApplicantCertification from './Components/ApplicantCertification';
-
+import axios from "axios";
 
 function App() {
+  const [showPop,setShowPop]=useState(false);
+  const handleOnClose=()=>setShowPop(false);
   const [formAllData, setFormAllData] = useState({
     FullName: "",
     PhoneNumber: "",
@@ -62,9 +65,9 @@ function App() {
   const [scholarshipData, setScholarshipData] = useState([
     { Scholarship: "" }
   ]);
-  const [cpaData, setCpaData] = useState([
+  const [cpaData, setCpaData] = useState(
     { partTaken: "", cpaState: "", licenseNumber: "", Active: "" }
-  ]);
+  );
   const [previousexpData, setPreviousExpData] = useState([
     { From: "", monthYear: "", phoneNumber: "", startSalary: "", lastSalary: "", To: "", Street: "", City: "", State: "", Zip: "", Resposibility: "", leaveReason: "", contactAboveEmp: "", Why: "" }
   ]);
@@ -96,6 +99,28 @@ function App() {
     { Name: "", Organization: "", Relationship: "", Telephonic: "" },
 
   ])
+  const referenceData = referencedata.filter(row => {
+    return Object.values(row).some(field => field !== "");
+  });
+ 
+  const[backgroundData,setBackgroundData]=useState({
+    firstName :"",
+    lastName :"",
+    securityNo :"",
+    mi :"",
+    usedName:""
+    })
+  const[addressData,setAddressData]=useState([
+    {street:"",address:"",fromTo:""},
+    {street:"",address:"",fromTo:""},
+    {street:"",address:"",fromTo:""}
+  ])
+  const addressdata = addressData.filter(row => {
+    return Object.values(row).some(field => field !== "");
+  });
+  const[certifiedData,setCertifiedData]=useState({
+    signature:"",date:""
+  })
   const handleChange = (e) => {
     setFormAllData({
       ...formAllData,
@@ -106,9 +131,16 @@ function App() {
 
   const formArray = [1, 2, 3, 4, 5, 6, 7, 8];
   const [formNo, setFormNo] = useState(formArray[0]);
-  function submitForm() {
-    document.body.innerHTML += '<h1>Submitted</h1>';
+  const submitForm =async ()=> {
+    try {
+      //----------- const request = await axios.post("http://localhost:8000/api/storedata", formData)
+      console.log("Response:", request.data);
+    } catch (error) {
+      if (error.response && error.response.status === 400) { setErrors(error.response.data.errors); }
+    }
+    <SubmitPop onClose={handleOnClose} visible={showPop}/>
   }
+
   function showStep(step) {
     switch (step) {
       case 1:
@@ -125,9 +157,9 @@ function App() {
       case 6:
         return <References referencedata={referencedata} setReferencedata={setReferencedata} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 7:
-        return <BackgroundData nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <BackgroundData addressData={addressData} setAddressData={setAddressData}backgroundData={backgroundData} setBackgroundData={setBackgroundData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 8:
-        return <ApplicantCertification nextStep={submitForm} preStep={() => setFormNo(formNo - 1)} />
+        return <ApplicantCertification setCertifiedData={setCertifiedData} certifiedData={certifiedData}nextStep={submitForm} preStep={() => setFormNo(formNo - 1)} />
       default:
         return <p>End</p>
     }

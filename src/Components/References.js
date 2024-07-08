@@ -44,24 +44,28 @@ export default function References({ referencedata, setReferencedata, preStep, n
     return (
         <div className="overflow-hidden px-20">
             <label htmlFor="responsibility" className="block text-gray-700 text-center text-sm font-bold mb-2">PLEASE IDENTIFY ANY ADDITIONAL KNOWLEDGE,SKILLS,QUALIFICATION OR AWARDS THAT WILL BE HELPDUL TOMAS IN CONSIDERING YOUR APPLICATION FOR EMPLOYEMENT</label>
-            <table className="min-w-500 min-h-400 bg-white border border-gray-200 mx-auto">
+            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
 
-                <thead>
+                <thead className="bg-gray-200 text-gray-700">
                     <tr className="bg-gray-100">
-                        <th className="px-6 py-3 text-center uppercase text-gray-700 text-sm font-bold">Name/title</th>
-                        <th className="px-6 py-3 text-center uppercase text-gray-700 text-sm font-bold">Organization</th>
-                        <th className="px-6 py-3 text-center uppercase text-gray-700 text-sm font-bold">Relationship</th>
-                        <th className="px-6 py-3 text-center uppercase text-gray-700 text-sm font-bold">Telephonic Number</th>
+                        <th className="px-4 py-2 uppercase">Name/title</th>
+                        <th className="px-4 py-2 uppercase">Organization</th>
+                        <th className="px-4 py-2 uppercase">Relationship</th>
+                        <th className="px-4 py-2 uppercase">Telephonic Number</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                     {referencedata.map((row, rowIndex) => (
                         <tr key={rowIndex}>
                             {Referencecolumns.map((Referencecolumn, colIndex) => (
-                                <td key={colIndex} className="px-4 py-2">
+                                <td key={colIndex} className="px-4 py-3">
                                     <input
                                         type="text"
-                                        className="w-full text-center text-sm text-gray-900"
+                                        className={`border  text-center rounded-md p-1 w-full ${
+                                            referenceErrror[rowIndex] && referenceErrror[rowIndex][Referencecolumn.name]
+                                              ? "border-red-500"
+                                              : ""
+                                          }`}
                                         name={Referencecolumn.name}
                                         value={row[Referencecolumn.name]}
                                         onChange={(e) => onChangeName(rowIndex, e)}
