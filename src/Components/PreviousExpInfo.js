@@ -14,11 +14,14 @@ export default function PreviousExpInfo({ previousexpData, setPreviousExpData, p
 
 
         let errors = {};
-        if (!previousexpData.From) {
-            errors.From = "From is required";
+        if (!previousexpData.from) {
+            errors.from = "from is required";
         }
-        if (!previousexpData.To) {
-            errors.To = "To is required";
+        if (!previousexpData.firmName) {
+            errors.firmName = "Firm Name is required";
+        }
+        if (!previousexpData.to) {
+            errors.to = "To is required";
         }
         if (!previousexpData.monthYear) {
             errors.monthYear = "Month/Year Field is required";
@@ -30,31 +33,38 @@ export default function PreviousExpInfo({ previousexpData, setPreviousExpData, p
         } else if (!/^\d{10}$/.test(previousexpData.phoneNumber.trim())) {
             errors.phoneNumber = "Phone Number must be exactly 10 digits";
         }
-        if (!previousexpData.Street) {
-            errors.Street = "Street is required";
+        if (!previousexpData.street) {
+            errors.street = "Street is required";
         }
-        if (!previousexpData.City) {
-            errors.City = "City is required";
+        if (!previousexpData.city) {
+            errors.city = "City is required";
         }
-        if (!previousexpData.Zip) {
-            errors.Zip = "ZIp is required";
+        if (!previousexpData.zip) {
+            errors.zip = "ZIp is required";
         }
-        if (!previousexpData.State) {
-            errors.State = "State is required";
+        if (!previousexpData.jobTitle) {
+            errors.jobTitle = "Job Title is required";
         }
-        if (!previousexpData.Responsibility) {
-            errors.Responsibility = "Responsibility Field is required";
+        if (!previousexpData.supervisorName) {
+            errors.supervisorName = "Supervisor Name is required";
+        }if (!previousexpData.supervisorTitle) {
+            errors.supervisorTitle = "Supervisor Title is required";
+        }
+        if (!previousexpData.state) {
+            errors.state = "State is required";
+        }
+        if (!previousexpData.responsibility) {
+            errors.responsibility = "Responsibility Field is required";
         }
         if (!previousexpData.leaveReason) {
             errors.leaveReason = "leaveReason Field is required";
         }
-        if (!previousexpData.contactAboveExp) {
-            errors.contactAboveExp = "contactAboveExp Work is required";
+        if (!previousexpData.contactEmployer) {
+            errors.contactEmployer = "contactEmployer Work is required";
         }
-        if (previousexpData.Why === 'no') {
-            if (!previousexpData.Why) {
-                errors.Why = "Responsibility Field is required";
-            }
+        if ( previousexpData.contactEmployer === 'no' && !previousexpData.why ) {
+                errors.why = "If No,This Field is required";
+           
         }
         // Present Salary validation
         if (!previousexpData.startSalary) {
@@ -83,8 +93,13 @@ export default function PreviousExpInfo({ previousexpData, setPreviousExpData, p
         <div class="px-20">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2">FROM</label>
-                <input className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.From && 'border-red-500'}`} type="text" name="From" value={previousexpData.From} onChange={handleInputChange} />
-                {errors.From && <p className="text-red-500 text-xs italic">{errors.From}</p>}
+                <input className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.from && 'border-red-500'}`} type="text" name="from" value={previousexpData.from} onChange={handleInputChange} />
+                {errors.from && <p className="text-red-500 text-xs italic">{errors.from}</p>}
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">FIRM NAME</label>
+                <input className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.firmName && 'border-red-500'}`} type="text" name="firmName" value={previousexpData.firmName} onChange={handleInputChange} />
+                {errors.firmName && <p className="text-red-500 text-xs italic">{errors.firmName}</p>}
             </div>
             <div class="flex flex-col md:flex-row mb-4">
                 <div class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
@@ -100,7 +115,7 @@ export default function PreviousExpInfo({ previousexpData, setPreviousExpData, p
             </div>
             <div class="flex flex-col md:flex-row mb-4">
                 <div class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">START SALARY</label>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">START SALARY</label>
                     <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.startSalary && 'border-red-500'}`} type="text" name="startSalary" value={previousexpData.startSalary} onChange={handleInputChange} />
                     {errors.startSalary && <p className="text-red-500 text-xs italic">{errors.startSalary}</p>}
                 </div>
@@ -111,39 +126,56 @@ export default function PreviousExpInfo({ previousexpData, setPreviousExpData, p
                 </div>
             </div>
             <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">TO</label>
-                <input className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.To && 'border-red-500'}`} type="text" name="To" value={previousexpData.To} onChange={handleInputChange} />
-                {errors.To && <p className="text-red-500 text-xs italic">{errors.To}</p>}
+                <label class="block text-gray-700 text-sm font-bold mb-2">TO</label>
+                <input className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.to && 'border-red-500'}`} type="text" name="to" value={previousexpData.to} onChange={handleInputChange} />
+                {errors.to && <p className="text-red-500 text-xs italic">{errors.to}</p>}
             </div>
             <div class="flex flex-col md:flex-row mb-4">
                 <div class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">STREET</label>
-                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.Street && 'border-red-500'}`} type="text" name="Street" value={previousexpData.Street} onChange={handleInputChange} />
-                    {errors.Street && <p className="text-red-500 text-xs italic">{errors.Street}</p>}
+                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.street && 'border-red-500'}`} type="text" name="street" value={previousexpData.street} onChange={handleInputChange} />
+                    {errors.street && <p className="text-red-500 text-xs italic">{errors.street}</p>}
                 </div>
                 <div class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">City</label>
-                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.City && 'border-red-500'}`} type="text" name="City" value={previousexpData.City} onChange={handleInputChange} />
-                    {errors.City && <p className="text-red-500 text-xs italic">{errors.City}</p>}
+                    <label class="block text-gray-700 text-sm font-bold mb-2">CITY</label>
+                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.city && 'border-red-500'}`} type="text" name="city" value={previousexpData.city} onChange={handleInputChange} />
+                    {errors.city && <p className="text-red-500 text-xs italic">{errors.city}</p>}
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">JOB TITLE</label>
+                <input className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.jobTitle && 'border-red-500'}`} type="text" name="jobTitle" value={previousexpData.jobTitle} onChange={handleInputChange} />
+                {errors.jobTitle && <p className="text-red-500 text-xs italic">{errors.jobTitle}</p>}
+            </div>
+            <div class="flex flex-col md:flex-row mb-4">
+                <div class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">SUPERVISOR NAME</label>
+                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.supervisorName && 'border-red-500'}`} type="text" name="supervisorName" value={previousexpData.supervisorName} onChange={handleInputChange} />
+                    {errors.supervisorName && <p className="text-red-500 text-xs italic">{errors.supervisorName}</p>}
+                </div>
+                <div class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">SUPERVISOR TITLE</label>
+                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.supervisorTitle && 'border-red-500'}`} type="text" name="supervisorTitle" value={previousexpData.supervisorTitle} onChange={handleInputChange} />
+                    {errors.supervisorTitle && <p className="text-red-500 text-xs italic">{errors.supervisorTitle}</p>}
                 </div>
             </div>
             <div class="flex flex-col md:flex-row mb-4">
                 <div class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">STATE</label>
-                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.State && 'border-red-500'}`} type="text" name="State" value={previousexpData.State} onChange={handleInputChange} />
-                    {errors.State && <p className="text-red-500 text-xs italic">{errors.State}</p>}
+                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.state && 'border-red-500'}`} type="text" name="state" value={previousexpData.state} onChange={handleInputChange} />
+                    {errors.state && <p className="text-red-500 text-xs italic">{errors.state}</p>}
                 </div>
                 <div class="w-full md:w-1/2">
                     <label class="block text-gray-700 text-sm font-bold mb-2">ZIP</label>
-                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.Zip && 'border-red-500'}`} type="text" name="Zip" value={previousexpData.Zip} onChange={handleInputChange} />
-                    {errors.Zip && <p className="text-red-500 text-xs italic">{errors.Zip}</p>}
+                    <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.zip && 'border-red-500'}`} type="text" name="zip" value={previousexpData.zip} onChange={handleInputChange} />
+                    {errors.zip && <p className="text-red-500 text-xs italic">{errors.zip}</p>}
                 </div>
             </div>
             <div class="flex flex-col md:flex-row mb-4">
                 <div class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">RESPONSIBILITY</label>
-                    <textarea id="email" name="Responsibility" rows="4" class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none ${errors.Responsibility && 'border-red-500'}`} value={previousexpData.Responsibility} onChange={handleInputChange} ></textarea>
-                    {errors.Responsibility && <p className="text-red-500 text-xs italic">{errors.Responsibility}</p>}
+                    <textarea id="email" name="responsibility" rows="4" class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none ${errors.responsibility && 'border-red-500'}`} value={previousexpData.responsibility} onChange={handleInputChange} ></textarea>
+                    {errors.responsibility && <p className="text-red-500 text-xs italic">{errors.responsibility}</p>}
                 </div>
                 <div class="w-full md:w-1/2">
                     <label for="start_date" class="block text-gray-700 text-sm font-bold mb-2">REASON FOR LEAVING</label>
@@ -154,33 +186,27 @@ export default function PreviousExpInfo({ previousexpData, setPreviousExpData, p
             <div class="items-center mb-4">
                 <div class="flex gap-3 items-center">
                     <label class="w-full md:w-auto text-gray-700 text-sm font-bold mb-2 md:mb-0">MAY WE CONTACT THE ABOVE EMPLOYER</label>
-                    <input id="applied-yes" type="radio" name="contactAboveExp" value="yes" checked={previousexpData.contactAboveExp === 'yes'} onChange={handleInputChange} class="form-radio h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 ml-4" />
+                    <input id="applied-yes" type="radio" name="contactEmployer" value="yes" checked={previousexpData.contactEmployer === 'yes'} onChange={handleInputChange} class="form-radio h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 ml-4" />
                     <label for="applied-yes" class="ml-2 text-gray-700 text-sm font-bold">Yes</label>
-                    <input id="applied-no" type="radio" name="contactAboveExp" value="no" checked={previousexpData.contactAboveExp === 'no'} onChange={handleInputChange} class="form-radio h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300" />
+                    <input id="applied-no" type="radio" name="contactEmployer" value="no" checked={previousexpData.contactEmployer === 'no'} onChange={handleInputChange} class="form-radio h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300" />
                     <label for="applied-no" class="ml-2 text-gray-700 text-sm font-bold">No</label>
                 </div>
-                {errors.contactAboveExp &&<p className="text-red-500 text-xs italic">{errors.contactAboveExp}</p>}
+                {errors.contactEmployer && <p className="text-red-500 text-xs italic">{errors.contactEmployer}</p>}
             </div>
-            
-            {/* <div className="flex flex-col md:flex-row items-center ">
-                    <label className="w-full md:w-auto text-gray-700 text-sm font-bold mb-2 md:mb-0">WILL YOU NOW OR IN THE FUTURE REQUIRE SPONSORSHIP FOR EMPLOYMENT VISA STATUS?</label>
-                    <div className="flex items-center">
-                        <label className="ml-2 text-gray-700 text-sm font-bold">
-                            <input type="radio" name="SponsorshipEmployement" value="yes" checked={formAllData.SponsorshipEmployement === 'yes'} onChange={handleChange} className="form-radio h-3 w-4 text-blue-600 focus:ring-blue-500 border-gray-300" />YES</label>
 
-                    </div>
-                    <div className="flex items-center ml-4">
-                        <label className="ml-2 text-gray-700 text-sm font-bold">
-                            <input type="radio" name="SponsorshipEmployement" value="no" checked={formAllData.SponsorshipEmployement === 'no'} onChange={handleChange} className="form-radio h-3 w-4 text-blue-600 focus:ring-blue-500 border-gray-300" />NO</label>
-                    </div>
-                    
-                </div>
-                {errors.SponsorshipEmployement && <p className="text-red-500 text-xs italic mb-4">{errors.SponsorshipEmployement}</p>} */}
-
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">IF NO,WHY?</label>
-                <input class={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ${errors.Why && 'border-red-500'}`} name="Why" value={previousexpData.Why} onChange={handleInputChange} type="text" />
+            {previousexpData.contactEmployer === 'no' && (
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">IF NO, WHY?
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                name="Why"
+                value={previousexpData.why}
+                onChange={handleInputChange}
+              /></label>
+                {errors.why&&<p className="text-red-500 text-xs italic">{errors.why}</p>}
             </div>
+          )}
             <div class="flex items-center justify-between mt-4">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={preStep}>Back</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={handleSubmit}>Next</button>

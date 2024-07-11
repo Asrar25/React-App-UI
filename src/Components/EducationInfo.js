@@ -30,6 +30,7 @@ export default function EducationInfo({
   // Handle Function for Education and Course Data
   const onChangeName = (index, e) => {
     const { name, value } = e.target;
+    
     const newEducationData = [...educationData];
     newEducationData[index] = { ...newEducationData[index], [name]: value };
     setEducationData(newEducationData);
@@ -52,14 +53,7 @@ export default function EducationInfo({
   };
 
   // Handle Function for Verbal, Math, Total, Scholarship, CPA Data
-  const  handleChange = (e) => {
-    const { name, value } = e.target;
-    setCpaData({ ...cpaData, [name]: value });
-    setResultVerbalData({ ...resultVerbalData, [name]: value });
-    setMathData({ ...resultMathData, [name]: value });
-    setTotalData({ ...resultTotalData, [name]: value });
-    setScholarshipData({ ...scholarshipData, [name]: value });
-  };
+
 
   // Handle Form Submission
   const handleSubmit = (e) => {
@@ -67,20 +61,20 @@ export default function EducationInfo({
 
     // Validate Education Data
     const newEducationErrors = educationData.map((row, index) => {
-        const newEducationErrors = {};
-        if (row.Education) {
-            if (!row.State) newEducationErrors.State = "State Field is Required";
-            if (!row.DateAttend) newEducationErrors.DateAttend = "DateAttend Field is Required";
-            if (!row.Degree) newEducationErrors.Degree = "Degree Field is Required";
-            if (!row.GraduationDate) newEducationErrors.GraduationDate = "GraduationDate Field is Required";
-            if (!row.Major) newEducationErrors.Major = "Major Field is Required";
-            if (!row.Minor) newEducationErrors.Minor = "Minor Field is Required";
-            if (!row.OverallGPA) newEducationErrors.OverallGPA = "OverallGPA Field is Required";
-            if (!row.GpaMajor) newEducationErrors.GpaMajor = "GpaMajor Field is Required";
-            if (!row.HrsWork) newEducationErrors.HrsWork = "HrsWork Field is Required";
-        } else if (index === 0) {
-            newEducationErrors.Education = "College/Education Field is Required";
-        }
+      const newEducationErrors = {};
+      if (row.Education) {
+        if (!row.State) newEducationErrors.State = "State Field is Required";
+        if (!row.DateAttend) newEducationErrors.DateAttend = "DateAttend Field is Required";
+        if (!row.Degree) newEducationErrors.Degree = "Degree Field is Required";
+        if (!row.GraduationDate) newEducationErrors.GraduationDate = "GraduationDate Field is Required";
+        if (!row.Major) newEducationErrors.Major = "Major Field is Required";
+        if (!row.Minor) newEducationErrors.Minor = "Minor Field is Required";
+        if (!row.OverallGPA) newEducationErrors.OverallGPA = "OverallGPA Field is Required";
+        if (!row.GpaMajor) newEducationErrors.GpaMajor = "GpaMajor Field is Required";
+        if (!row.HrsWork) newEducationErrors.HrsWork = "HrsWork Field is Required";
+      } else if (index === 0) {
+        newEducationErrors.Education = "College/Education Field is Required";
+      }
       return newEducationErrors;
     });
     setEducationErrors(newEducationErrors);
@@ -92,10 +86,10 @@ export default function EducationInfo({
         if (!row.School) newCourseErrors.School = "School Field is Required";
         if (!row.creditHour) newCourseErrors.creditHour = "creditHour Field is Required";
         if (!row.Grade) newCourseErrors.Grade = "Grade Field is Required";
-    } else if (index === 0) {
+      } else if (index === 0) {
         newCourseErrors.Course = "Course Field is Required";
-    }
-    return newCourseErrors;
+      }
+      return newCourseErrors;
     });
     setCourseErrors(newCourseErrors);
 
@@ -148,6 +142,21 @@ export default function EducationInfo({
       console.log("Form has errors. Please check.");
     }
   };
+  const handleEducationChange = (event, index) => {
+    const { name, value } = event.target;
+    const updatedEducationData = [...educationData];
+    updatedEducationData[index] = { ...updatedEducationData[index], [name]: value };
+    setEducationData(updatedEducationData);
+  };
+
+  // Handle Course Data Change
+  const handleCourseChange = (event, index) => {
+    const { name, value } = event.target;
+    const updatedCourseData = [...courseData];
+    updatedCourseData[index] = { ...updatedCourseData[index], [name]: value };
+    setCourseData(updatedCourseData);
+  };
+
 
   // Column Definitions
   const Educationcolumns = [
@@ -164,10 +173,10 @@ export default function EducationInfo({
   ];
 
   const Coursecolumns = [
-    { name: "Course",label: "Course"  },
-    { name: "School",label: "School" },
-    { name: "creditHour",label: "CreditHours" },
-    { name: "Grade",label: "Grade" },
+    { name: "Course", label: "Course" },
+    { name: "School", label: "School" },
+    { name: "creditHour", label: "CreditHours" },
+    { name: "Grade", label: "Grade" },
   ];
 
   const ResultVerbalcolumns = [
@@ -219,12 +228,11 @@ export default function EducationInfo({
                       type="text"
                       name={column.name}
                       value={row[column.name]}
-                      onChange={(e) => onChangeName(index, e)}
-                      className={`border border-gray-300 text-center rounded-md p-1 w-full ${
-                        educationErrors[index] && educationErrors[index][column.name]
+                      onChange={(e) => handleEducationChange(e, index)}
+                      className={`border border-gray-300 text-center rounded-md p-1 w-full ${educationErrors[index] && educationErrors[index][column.name]
                           ? "border-red-500"
                           : ""
-                      }`}
+                        }`}
                     />
                     {educationErrors[index] && educationErrors[index][column.name] && (
                       <p className="text-red-500 text-xs italic">
@@ -257,12 +265,11 @@ export default function EducationInfo({
                         type="text"
                         name={column.name}
                         value={row[column.name]}
-                        onChange={(e) => onChangeName(index, e)}
-                        className={`border border-gray-300 text-center rounded-md p-1 w-full ${
-                          courseErrors[index] && courseErrors[index][column.name]
+                        onChange={(e) => handleCourseChange(e, index)}
+                        className={`border border-gray-300 text-center rounded-md p-1 w-full ${courseErrors[index] && courseErrors[index][column.name]
                             ? "border-red-500"
                             : ""
-                        }`}
+                          }`}
                       />
                       {courseErrors[index] && courseErrors[index][column.name] && (
                         <p className="text-red-500 text-xs italic">
@@ -295,10 +302,12 @@ export default function EducationInfo({
                       type="text"
                       name={column.name}
                       value={resultVerbalData[column.name]}
-                      onChange={handleChange}
-                      className={`border text-center border-gray-300 rounded-md p-1 w-full ${
-                        resultVerbalErrors[column.name] ? "border-red-500" : ""
-                      }`}
+                      onChange={(event) => {
+                        const { name, value } = event.target; // Extract the name and value from the event target
+                        setResultVerbalData({ ...resultVerbalData, [name]: value });
+                      }}
+                      className={`border text-center border-gray-300 rounded-md p-1 w-full ${resultVerbalErrors[column.name] ? "border-red-500" : ""
+                        }`}
                     />
                     {resultVerbalErrors[column.name] && (
                       <p className="text-red-500 text-xs italic">
@@ -330,10 +339,12 @@ export default function EducationInfo({
                       type="text"
                       name={column.name}
                       value={resultMathData[column.name]}
-                      onChange={handleChange}
-                      className={`border border-gray-300 text-center rounded-md p-1 w-full ${
-                        resultMathErrors[column.name] ? "border-red-500" : ""
-                      }`}
+                      onChange={(event) => {
+                        const { name, value } = event.target; // Extract the name and value from the event target
+                        setMathData({ ...resultMathData, [name]: value });
+                      }}
+                      className={`border border-gray-300 text-center rounded-md p-1 w-full ${resultMathErrors[column.name] ? "border-red-500" : ""
+                        }`}
                     />
                     {resultMathErrors[column.name] && (
                       <p className="text-red-500 text-xs italic">
@@ -365,10 +376,12 @@ export default function EducationInfo({
                       type="text"
                       name={column.name}
                       value={resultTotalData[column.name]}
-                      onChange={handleChange}
-                      className={`border border-gray-300  text-center rounded-md p-1 w-full ${
-                        resultTotalErrors[column.name] ? "border-red-500" : ""
-                      }`}
+                      onChange={(event) => {
+                        const { name, value } = event.target; // Extract the name and value from the event target
+                        setTotalData({ ...resultTotalData, [name]: value });
+                      }}
+                      className={`border border-gray-300  text-center rounded-md p-1 w-full ${resultTotalErrors[column.name] ? "border-red-500" : ""
+                        }`}
                     />
                     {resultTotalErrors[column.name] && (
                       <p className="text-red-500 text-xs italic">
@@ -400,10 +413,12 @@ export default function EducationInfo({
                       type="text"
                       name={column.name}
                       value={scholarshipData[column.name]}
-                      onChange={handleChange}
-                      className={`border  border-gray-300 text-center rounded-md p-1 w-full ${
-                        scholarshipErrors[column.name] ? "border-red-500" : ""
-                      }`}
+                      onChange={(event) => {
+                        const { name, value } = event.target; // Extract the name and value from the event target
+                        setScholarshipData({ ...scholarshipData, [name]: value });
+                      }}
+                      className={`border  border-gray-300 text-center rounded-md p-1 w-full ${scholarshipErrors[column.name] ? "border-red-500" : ""
+                        }`}
                     />
                     {scholarshipErrors[column.name] && (
                       <p className="text-red-500 text-xs italic">
@@ -428,31 +443,74 @@ export default function EducationInfo({
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              <tr>
-                {Cpacolumns.map((column) => (
-                  <td key={column.name} className="px-4 py-3">
-                    <input
-                      type="text"
-                      name={column.name}
-                      value={cpaData[column.name]}
-                      onChange={handleChange}
-                      className={`border border-gray-300  text-center rounded-md p-1 w-full ${
-                        cpaErrors[column.name] ? "border-red-500" : ""
-                      }`}
-                    />
-                    {cpaErrors[column.name] && (
-                      <p className="text-red-500 text-xs italic">{cpaErrors[column.name]}</p>
-                    )}
-                  </td>
-                ))}
-              </tr>
-            </tbody>
+            <tr>
+  {Cpacolumns.map((column) => (
+    <td key={column.name} className="px-4 py-3 text-center">
+      {column.name === 'Active' ? (
+        <div className="flex gap-3 justify-center items-center">
+          <label className="flex items-center gap-1">
+            <input
+              type="radio"
+              name={column.name}
+              value="yes"
+              checked={cpaData.Active === 'yes'}
+              onChange={(event) => {
+                const { name, value } = event.target;
+                setCpaData({ ...cpaData, [name]: value });
+              }}
+              className="form-radio h-3 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+            /> 
+            YES
+          </label>
+          <label className="flex items-center gap-1">
+            <input
+              type="radio"
+              name={column.name}
+              value="no"
+              checked={cpaData.Active === 'no'}
+              onChange={(event) => {
+                const { name, value } = event.target;
+                setCpaData({ ...cpaData, [name]: value });
+              }}
+              className="form-radio h-3 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+            /> 
+            NO
+          </label>
+          {cpaErrors[column.name] && (
+            <p className="text-red-500 text-xs italic">{cpaErrors[column.name]}</p>
+          )}
+        </div>
+      ) : (
+        <div>
+          <input
+            type="text"
+            name={column.name}
+            value={cpaData[column.name]}
+            onChange={(event) => {
+              const { name, value } = event.target;
+              setCpaData({ ...cpaData, [name]: value });
+            }}
+            className={`border border-gray-300 text-center rounded-md p-1 w-full ${
+              cpaErrors[column.name] ? "border-red-500" : ""
+            }`}
+          />
+          {cpaErrors[column.name] && (
+            <p className="text-red-500 text-xs italic">{cpaErrors[column.name]}</p>
+          )}
+        </div>
+      )}
+    </td>
+  ))}
+</tr>
+
+</tbody>
+
           </table>
         </div>
-        <div className="mt-6 flex justify-end">
+        <div className="mt-6 flex justify-between">
           <button
             onClick={preStep}
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+            className="bg-blue-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
           >
             Back
           </button>

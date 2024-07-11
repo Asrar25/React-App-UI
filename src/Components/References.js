@@ -61,11 +61,10 @@ export default function References({ referencedata, setReferencedata, preStep, n
                                 <td key={colIndex} className="px-4 py-3">
                                     <input
                                         type="text"
-                                        className={`border  text-center rounded-md p-1 w-full ${
-                                            referenceErrror[rowIndex] && referenceErrror[rowIndex][Referencecolumn.name]
-                                              ? "border-red-500"
-                                              : ""
-                                          }`}
+                                        className={`border  text-center rounded-md p-1 w-full ${referenceErrror[rowIndex] && referenceErrror[rowIndex][Referencecolumn.name]
+                                                ? "border-red-500"
+                                                : ""
+                                            }`}
                                         name={Referencecolumn.name}
                                         value={row[Referencecolumn.name]}
                                         onChange={(e) => onChangeName(rowIndex, e)}

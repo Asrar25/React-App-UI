@@ -12,25 +12,26 @@ import ApplicantCertification from './Components/ApplicantCertification';
 import axios from "axios";
 
 function App() {
-  const [showPop,setShowPop]=useState(false);
-  const handleOnClose=()=>setShowPop(false);
+  const [showPop, setShowPop] = useState(false);
+  const [errors, setErrors] = useState({});
+  
   const [formAllData, setFormAllData] = useState({
-    FullName: "",
-    PhoneNumber: "",
-    FaxNumber: "",
-    Email: "",
-    Address: "",
-    Position: "",
-    PresentSalary: "",
-    SalaryDesire: "",
-    Date: "",
-    Time: "",
-    AlreadySB: "",
-    Where: "",
-    Application: "",
-    LegallyWork: "",
-    SponsorshipEmployement: "",
-    ConvictedCrime: ""
+    fullName: "",
+    phoneNumber: "",
+    faxNumber: "",
+    email: "",
+    address: "",
+    position: "",
+    presentSalary: "",
+    salaryDesire: "",
+    date: "",
+    time: "",
+    alreadySB: "",
+    where: "",
+    application: "",
+    legallyWork: "",
+    sponsorshipEmployement: "",
+    convictedCrime: ""
   });
   const [educationData, setEducationData] = useState([
     { Education: "", State: "", DateAttend: "", Degree: "", GraduationDate: "", Major: "", Minor: "", OverallGPA: "", GpaMajor: "", HrsWork: "" },
@@ -40,7 +41,7 @@ function App() {
   const educationdata = educationData.filter(row => {
     return Object.values(row).some(field => field !== "");
   });
-  console.log(educationdata);
+
   const [courseData, setCourseData] = useState([
     { Course: "", School: "", creditHour: "", Grade: "" },
     { Course: "", School: "", creditHour: "", Grade: "" },
@@ -51,26 +52,32 @@ function App() {
   const coursedata = courseData.filter(row => {
     return Object.values(row).some(field => field !== "");
   });
-  console.log(coursedata);
-  
-  const [resultVerbalData, setResultVerbalData] = useState([
+
+
+  const [resultVerbalData, setResultVerbalData] = useState(
     { SatVerbal: "", GreVerbal: "", Act: "" }
-  ]);
-  const [resultMathData, setMathData] = useState([
+  );
+
+  const [resultMathData, setMathData] = useState(
     { SatMath: "", GreMath: "", Lsat: "" }
-  ]);
-  const [resultTotalData, setTotalData] = useState([
+  );
+
+  const [resultTotalData, setTotalData] = useState(
     { SatTotal: "", GreTotal: "", Gmat: "" }
-  ]);
-  const [scholarshipData, setScholarshipData] = useState([
+  );
+
+  const [scholarshipData, setScholarshipData] = useState(
     { Scholarship: "" }
-  ]);
+  );
+
   const [cpaData, setCpaData] = useState(
     { partTaken: "", cpaState: "", licenseNumber: "", Active: "" }
   );
-  const [previousexpData, setPreviousExpData] = useState([
-    { From: "", monthYear: "", phoneNumber: "", startSalary: "", lastSalary: "", To: "", Street: "", City: "", State: "", Zip: "", Resposibility: "", leaveReason: "", contactAboveEmp: "", Why: "" }
-  ]);
+
+  const [previousexpData, setPreviousExpData] = useState(
+    { from: "", monthYear: "", phoneNumber: "", startSalary: "", lastSalary: "", to: "",street: "", city: "", state: "", zip: "",jobTitle:"",supervisorName:"",supervisorTitle:"",firmName:"", responsibility: "", leaveReason: "", contactEmployer: "", why: "" }
+);
+
   const [previousexpInfoData, setPreviousExpInfoData] = useState([
     {
       From: "",
@@ -89,9 +96,11 @@ function App() {
       Why: ""
     }
   ]);
+
   const [additionalSkill, setAdditionalSkill] = useState({
     Qualification: "",
   });
+
   const [referencedata, setReferencedata] = useState([
     { Name: "", Organization: "", Relationship: "", Telephonic: "" },
     { Name: "", Organization: "", Relationship: "", Telephonic: "" },
@@ -102,24 +111,28 @@ function App() {
   const referenceData = referencedata.filter(row => {
     return Object.values(row).some(field => field !== "");
   });
- 
-  const[backgroundData,setBackgroundData]=useState({
-    firstName :"",
-    lastName :"",
-    securityNo :"",
-    mi :"",
-    usedName:""
-    })
-  const[addressData,setAddressData]=useState([
-    {street:"",address:"",fromTo:""},
-    {street:"",address:"",fromTo:""},
-    {street:"",address:"",fromTo:""}
+
+  const [backgroundData, setBackgroundData] = useState(
+    {
+      firstName: "",
+      lastName: "",
+      securityNo: "",
+      mi: "",
+      usedName: ""
+    }
+  )
+
+  const [addressData, setAddressData] = useState([
+    { street: "", address: "", fromTo: "" },
+    { street: "", address: "", fromTo: "" },
+    { street: "", address: "", fromTo: "" }
   ])
   const addressdata = addressData.filter(row => {
     return Object.values(row).some(field => field !== "");
   });
-  const[certifiedData,setCertifiedData]=useState({
-    signature:"",date:""
+
+  const [certifiedData, setCertifiedData] = useState({
+    signature: "", signatureDate: ""
   })
   const handleChange = (e) => {
     setFormAllData({
@@ -127,18 +140,76 @@ function App() {
       [e.target.name]: e.target.value
     });
   };
+  const handleOnClose=(e)=>{
+    setShowPop(false);
+  }
 
 
   const formArray = [1, 2, 3, 4, 5, 6, 7, 8];
   const [formNo, setFormNo] = useState(formArray[0]);
-  const submitForm =async ()=> {
+  const submitForm = async () => {
+    
     try {
-      //----------- const request = await axios.post("http://localhost:8000/api/storedata", formData)
-      console.log("Response:", request.data);
+      const response = await axios.post('http://localhost:8000/api/store',{
+        fullName:formAllData.fullName,
+        mobileNumber:formAllData.phoneNumber,
+        faxNumber:formAllData.faxNumber,
+        email:formAllData.email,
+        address:formAllData.address,
+        position:formAllData.position,
+        presentSalary:formAllData.presentSalary,
+        salaryDesire:formAllData.salaryDesire,
+        date:formAllData.date,
+        time:formAllData.time,
+        alreadySB:formAllData.alreadySB,
+        where: formAllData.where,
+        application:formAllData.application,
+        legallyWork:formAllData.legallyWork,
+        sponsorshipEmployement:formAllData.sponsorshipEmployement,
+        convictedCrime:formAllData.convictedCrime,
+        educationdata:educationdata,
+        coursedata:coursedata,
+        resultVerbalData:resultVerbalData,
+        resultMathData:resultMathData,
+        resultTotalData:resultTotalData,
+        scholarshipData:scholarshipData,
+        cpaData:cpaData,
+        experienceFrom:previousexpData.from,
+          monthYear: previousexpData.monthYear, 
+          phoneNumber:previousexpData.phoneNumber,
+           startSalary: previousexpData.startSalary,
+           lastSalary: previousexpData.lastSalary,
+           experienceTo:previousexpData.to,
+           street:previousexpData.street, 
+           city: previousexpData.city,
+           state:previousexpData.state, 
+           zip: previousexpData.zip,
+           jobTitle:previousexpData.jobTitle,
+           supervisorName:previousexpData.supervisorName,
+           supervisorTitle:previousexpData.supervisorTitle,
+           firmName:previousexpData.firmName,
+           responsibility: previousexpData.responsibility,
+           leaveReason:previousexpData.leaveReason,
+           contactEmployer: previousexpData.contactEmployer, 
+           why: previousexpData.why,
+           previousexpInfoData:previousexpInfoData,
+           Qualification:additionalSkill.Qualification,
+           referenceData:referenceData,
+           backgroundData:backgroundData,
+           addressdata:addressdata,
+           signature:certifiedData.signature,
+           signatureDate:certifiedData.signatureDate
+      })
+      console.log(previousexpData);
+      console.log(response.data);
+      setShowPop(true);
     } catch (error) {
-      if (error.response && error.response.status === 400) { setErrors(error.response.data.errors); }
+        if (error.response && error.response.status === 400) { setErrors(error.response.data.errors); }
+        console.log(errors);
     }
-    <SubmitPop onClose={handleOnClose} visible={showPop}/>
+    
+   
+
   }
 
   function showStep(step) {
@@ -157,9 +228,9 @@ function App() {
       case 6:
         return <References referencedata={referencedata} setReferencedata={setReferencedata} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 7:
-        return <BackgroundData addressData={addressData} setAddressData={setAddressData}backgroundData={backgroundData} setBackgroundData={setBackgroundData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
+        return <BackgroundData addressData={addressData} setAddressData={setAddressData} backgroundData={backgroundData} setBackgroundData={setBackgroundData} nextStep={() => setFormNo(formNo + 1)} preStep={() => setFormNo(formNo - 1)} />
       case 8:
-        return <ApplicantCertification setCertifiedData={setCertifiedData} certifiedData={certifiedData}nextStep={submitForm} preStep={() => setFormNo(formNo - 1)} />
+        return <ApplicantCertification setCertifiedData={setCertifiedData} certifiedData={certifiedData} errors={errors} setErrors={setErrors} nextStep={submitForm} preStep={() => setFormNo(formNo - 1)} />
       default:
         return <p>End</p>
     }
@@ -181,6 +252,7 @@ function App() {
         }
       </div>
       {showStep(formNo)}
+      {showPop && <SubmitPop handleOnClose={handleOnClose} visible={showPop} />}
     </div>
   );
 }
